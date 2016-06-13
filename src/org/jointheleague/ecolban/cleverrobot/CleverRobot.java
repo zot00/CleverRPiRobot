@@ -40,40 +40,20 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 	}
 
 	public void run() {
-		int leftSpeed = 500;
-		int rightSpeed = 500;
+		System.out.println("Running...");
+		int leftSpeed = -50;
+		int rightSpeed = 50;
 		running = true;
 		while (running) {
 			try {
 				driveDirect(leftSpeed, rightSpeed);
-				Thread.sleep(20);
-				readSensors(SENSORS_BUMPS_AND_WHEEL_DROPS);
-				if (isBumpLeft() && isBumpRight()) {
-					// adjust the wheel speeds
-				}
-				if (isBumpLeft()) {
-					// adjust the wheel speeds
-				}
-				if (isBumpRight()) {
-					// adjust the wheel speeds
-				}
-				if (debug) {
-					System.out.println(String.format(
-							"Left bumber = %s, Right bumber = %s",
-							isBumpLeft(), isBumpRight()));
-					System.out.println(String.format(
-							"Left wheel speed = %d, Right wheel speed = %d",
-							leftSpeed, rightSpeed));
-				}
-				// ...
-				// if (/* goal reached */){
-				// running = false;
-				// }
-				
-				
-
+				Thread.sleep(500);
+//				readSensors(SENSORS_BUMPS_AND_WHEEL_DROPS);
+				readSensors(SENSORS_GROUP_ID101);
+				getLightBumps();
 			} catch (IOException | InterruptedException e) {
 				running = false;
+				System.out.println(e.getClass());
 			}
 		}
 
