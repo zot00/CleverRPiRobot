@@ -22,7 +22,7 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 
 	public static void main(String[] args) throws IOException {
 		try {
-			IRobotInterface base = new SimpleIRobot();
+			IRobotInterface base = new SimpleIRobot(false, true, true);
 			CleverRobot rob = new CleverRobot(base);
 			rob.initialize();
 			rob.run();
@@ -34,7 +34,7 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 	/* This method is executed when the robot first starts up. */
 	private void initialize() throws IOException {
 		// what would you like me to do, Clever Human?
-		if(debug){
+		if (debug) {
 			System.out.println("Initializing...");
 		}
 	}
@@ -48,8 +48,8 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 			try {
 				driveDirect(leftSpeed, rightSpeed);
 				Thread.sleep(500);
-//				readSensors(SENSORS_BUMPS_AND_WHEEL_DROPS);
-				readSensors(SENSORS_GROUP_ID101);
+				readSensors(SENSORS_BUMPS_AND_WHEEL_DROPS);
+				// readSensors(SENSORS_GROUP_ID101);
 				getLightBumps();
 			} catch (IOException | InterruptedException e) {
 				running = false;
@@ -61,6 +61,11 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 			shutDown();
 		} catch (IOException e) {
 		}
+
+	}
+
+	public void run2() {
+		System.out.println("Sending wall signal");
 
 	}
 
