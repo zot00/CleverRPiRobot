@@ -1,6 +1,7 @@
 package org.jointheleague.ecolban.cleverrobot;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.jointheleague.ecolban.rpirobot.IRobotAdapter;
 import org.jointheleague.ecolban.rpirobot.IRobotInterface;
@@ -11,18 +12,18 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 	// The following measurements are taken from the interface specification
 
 	private boolean running;
-	private final boolean debug = true; // Set to true to get debug messages.
+	private static final boolean DEBUG = false; // Set to true to get debug messages.
 
 	public CleverRobot(IRobotInterface iRobot) {
 		super(iRobot);
-		if (debug) {
+		if (DEBUG) {
 			System.out.println("Hello. I'm CleverRobot");
 		}
 	}
 
 	public static void main(String[] args) throws IOException {
 		try {
-			IRobotInterface base = new SimpleIRobot(false, true, true);
+			IRobotInterface base = new SimpleIRobot(DEBUG, true, true);
 			CleverRobot rob = new CleverRobot(base);
 			rob.initialize();
 			rob.run();
@@ -34,7 +35,7 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 	/* This method is executed when the robot first starts up. */
 	private void initialize() throws IOException {
 		// what would you like me to do, Clever Human?
-		if (debug) {
+		if (DEBUG) {
 			System.out.println("Initializing...");
 		}
 	}
@@ -48,9 +49,10 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 			try {
 				driveDirect(leftSpeed, rightSpeed);
 				Thread.sleep(500);
-				readSensors(SENSORS_BUMPS_AND_WHEEL_DROPS);
-				// readSensors(SENSORS_GROUP_ID101);
-				getLightBumps();
+				// readSensors(SENSORS_LIGHT_BUMPER);
+				readSensors(SENSORS_GROUP_ID101);
+				int[] lightBumps = getLightBumps();
+				System.out.println("Light bumps = " + Arrays.toString(lightBumps));
 			} catch (IOException | InterruptedException e) {
 				running = false;
 				System.out.println(e.getClass());
