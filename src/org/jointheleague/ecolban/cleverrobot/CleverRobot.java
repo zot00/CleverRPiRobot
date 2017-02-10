@@ -12,7 +12,8 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 	// The following measurements are taken from the interface specification
 
 	private boolean running;
-	private static final boolean DEBUG = false; // Set to true to get debug messages.
+	private static final boolean DEBUG = false; // Set to true to get debug
+												// messages.
 
 	public CleverRobot(IRobotInterface iRobot) {
 		super(iRobot);
@@ -23,7 +24,7 @@ public class CleverRobot extends IRobotAdapter implements Runnable {
 
 	public static void main(String[] args) throws IOException {
 		try {
-			IRobotInterface base = new SimpleIRobot(DEBUG, true, true);
+			IRobotInterface base = new SimpleIRobot();
 			CleverRobot rob = new CleverRobot(base);
 			rob.initialize();
 			rob.run();
