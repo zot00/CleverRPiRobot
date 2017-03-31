@@ -1,80 +1,60 @@
 package org.jointheleague.ecolban.cleverrobot;
-
+/*********************************************************************************************
+ * Vic's ultrasonic sensor running with Erik's Clever Robot for Pi
+ * version 0.9, 170227
+ **********************************************************************************************/
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.jointheleague.ecolban.rpirobot.IRobotAdapter;
 import org.jointheleague.ecolban.rpirobot.IRobotInterface;
 import org.jointheleague.ecolban.rpirobot.SimpleIRobot;
 
-public class CleverRobot extends IRobotAdapter implements Runnable {
+public class CleverRobot extends IRobotAdapter
+{
 
-	// The following measurements are taken from the interface specification
+    public CleverRobot(IRobotInterface iRobot)
+    {
+	super(iRobot);
+    }
 
-	private boolean running;
-	private static final boolean DEBUG = false; // Set to true to get debug
-												// messages.
+    public static void main(String[] args) throws Exception
+    {
+	System.out.println("Try event listner, rev Monday 2030");
+	IRobotInterface base = new SimpleIRobot();
+	CleverRobot rob = new CleverRobot(base);
+	rob.getGoing();
+    }
 
-	public CleverRobot(IRobotInterface iRobot) {
-		super(iRobot);
-		if (DEBUG) {
-			System.out.println("Hello. I'm CleverRobot");
-		}
-	}
-
-	public static void main(String[] args) throws IOException {
-		try {
-			IRobotInterface base = new SimpleIRobot();
-			CleverRobot rob = new CleverRobot(base);
-			rob.initialize();
-			rob.run();
-		} catch (InterruptedException | IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	/* This method is executed when the robot first starts up. */
-	private void initialize() throws IOException {
-		// what would you like me to do, Clever Human?
-		if (DEBUG) {
-			System.out.println("Initializing...");
-		}
-	}
-
-	public void run() {
-		System.out.println("Running...");
-		int leftSpeed = -50;
-		int rightSpeed = 50;
-		running = true;
-		while (running) {
-			try {
-				driveDirect(leftSpeed, rightSpeed);
-				Thread.sleep(500);
-				// readSensors(SENSORS_LIGHT_BUMPER);
-				readSensors(SENSORS_GROUP_ID101);
-				int[] lightBumps = getLightBumps();
-				System.out.println("Light bumps = " + Arrays.toString(lightBumps));
-			} catch (IOException | InterruptedException e) {
-				running = false;
-				System.out.println(e.getClass());
+    private void getGoing()
+    {
+	Sonar sonar = new Sonar();
+	for (int i = 0; i < 100000; i++)
+	    {
+		    try
+			{
+			    System.out.print(sonar.readSonar("left") + "     ");
+			    Thread.sleep(300);
+			    System.out.print(sonar.readSonar("center") + "     ");
+			    Thread.sleep(300);
+			    System.out.print(sonar.readSonar("right") + "\n");
+			    Thread.sleep(300);
+			} catch (Exception e)
+			{
+			    System.out.println("readSonar exception");
 			}
-		}
+	    }
+	try
+	    {
+		shutDown();
+	    } catch (IOException e)
+	    {
+	    }
+    }
 
-		try {
-			shutDown();
-		} catch (IOException e) {
-		}
-
-	}
-
-	public void run2() {
-		System.out.println("Sending wall signal");
-
-	}
-
-	private void shutDown() throws IOException {
-		stop();
-		closeConnection();
-	}
-
+    private void shutDown() throws IOException
+    {
+	reset();
+	stop();
+	closeConnection();
+    }
 }
