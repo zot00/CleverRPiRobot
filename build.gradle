@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'org.jointheleague.ecolban.cleverrobot.CleverRobot'
+
+repositories {
+	mavenCentral()
+	flatDir {
+       dirs 'lib'
+   }
+}
+
+jar {
+	baseName = 'c-bot'
+	version = '0.1.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+dependencies {
+   compile name: 'pi4j-core-javadoc'
+   compile name: 'pi4j-core-sources'
+   compile name: 'pi4j-core'
+   compile name: 'pi4j-device'
+   compile name: 'pi4j-gpio-extension'
+   compile name: 'pi4j-service'
+   compile name: 'RPiGreenbot'
+   compile name: 'RPiGreenbotdoc'
+}
