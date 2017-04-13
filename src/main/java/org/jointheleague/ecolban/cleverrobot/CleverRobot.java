@@ -28,7 +28,7 @@ public class CleverRobot extends IRobotAdapter
     private void getGoing()
     {
 	Sonar sonar = new Sonar();
-		System.out.println("This is a test");
+		System.out.println("This");
 
 	for (int i = 0; i < 100000; i++)
 	    {
