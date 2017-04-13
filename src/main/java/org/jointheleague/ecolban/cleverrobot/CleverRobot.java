@@ -28,7 +28,7 @@ public class CleverRobot extends IRobotAdapter
     private void getGoing()
     {
 	Sonar sonar = new Sonar();
-
+	System.out.println("Try event listner, rev Monday 2030");
 	for (int i = 0; i < 100000; i++)
 	    {
 		    try
