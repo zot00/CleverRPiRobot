@@ -1,4 +1,5 @@
 package org.jointheleague.ecolban.cleverrobot;
+
 /*********************************************************************************************
  * Vic's ultrasonic sensor running with Erik's Clever Robot for Pi
  * version 0.9, 170227
@@ -9,52 +10,38 @@ import org.jointheleague.ecolban.rpirobot.IRobotAdapter;
 import org.jointheleague.ecolban.rpirobot.IRobotInterface;
 import org.jointheleague.ecolban.rpirobot.SimpleIRobot;
 
-public class CleverRobot extends IRobotAdapter
-{
-
-    public CleverRobot(IRobotInterface iRobot)
-    {
-	super(iRobot);
-    }
-
-    public static void main(String[] args) throws Exception
-    {
-	System.out.println("Try event listner, rev Monday 2030");
-	IRobotInterface base = new SimpleIRobot();
-	CleverRobot rob = new CleverRobot(base);
-	rob.getGoing();
-    }
-
-    private void getGoing()
-    {
+public class CleverRobot extends IRobotAdapter {
 	Sonar sonar = new Sonar();
-	for (int i = 0; i < 100000; i++)
-	    {
-		    try
-			{
-			    System.out.print(sonar.readSonar("left") + "     ");
-			    Thread.sleep(300);
-			    System.out.print(sonar.readSonar("center") + "     ");
-			    Thread.sleep(300);
-			    System.out.print(sonar.readSonar("right") + "\n");
-			    Thread.sleep(300);
-			} catch (Exception e)
-			{
-			    System.out.println("readSonar exception");
-			}
-	    }
-	try
-	    {
-		shutDown();
-	    } catch (IOException e)
-	    {
-	    }
-    }
+	
+	public CleverRobot(IRobotInterface iRobot) {
+		super(iRobot);
+	}
 
-    private void shutDown() throws IOException
-    {
-	reset();
-	stop();
-	closeConnection();
-    }
+	public static void main(String[] args) throws Exception {
+		System.out.println("Try event listner, rev Monday 2030");
+		IRobotInterface base = new SimpleIRobot();
+		CleverRobot rob = new CleverRobot(base);
+		rob.setup();
+		while(rob.loop()){}
+		rob.shutDown();
+		
+	}
+
+	private void setup() throws Exception {
+		
+	}
+	
+	private boolean loop() throws Exception{
+		System.out.println("LEFT SONAR: " + sonar.readSonar("left"));
+		System.out.println("RIGHT SONAR: " + sonar.readSonar("right"));
+		System.out.println("CENTER SONAR: " + sonar.readSonar("center"));
+		
+		return true;
+	}
+	private void shutDown() throws IOException {
+		reset();
+		stop();
+		closeConnection();
+	}
+
 }
