@@ -30,6 +30,7 @@ public class CleverRobot extends IRobotAdapter {
 	private void setup() throws Exception {
 		System.out.println("update");
 		System.out.println("update");
+		System.out.println("update1");
 	}
 	
 	private boolean loop() throws Exception{
