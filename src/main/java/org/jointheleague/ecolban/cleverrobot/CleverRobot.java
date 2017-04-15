@@ -28,7 +28,7 @@ public class CleverRobot extends IRobotAdapter {
 	}
 
 	private void setup() throws Exception {
-		System.out.println("update");
+		//System.out.println("update");
 
 	}
 	
