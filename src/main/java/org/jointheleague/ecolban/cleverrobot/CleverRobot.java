@@ -28,7 +28,7 @@ public class CleverRobot extends IRobotAdapter {
 	}
 
 	private void setup() throws Exception {
-		//System.out.println("update");
+		//
 		driveDirect(200,200);
 
 	}
