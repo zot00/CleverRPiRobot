@@ -28,7 +28,7 @@ public class CleverRobot extends IRobotAdapter {
 	}
 
 	private void setup() throws Exception {
-		
+		driveDirect(100,100);
 	}
 	
 	private boolean loop() throws Exception{
