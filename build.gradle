@@ -11,6 +11,7 @@ repositories {
 }
 
 jar {
+
 	baseName = 'c-bot'
 	version = '0.1.0'
 }
