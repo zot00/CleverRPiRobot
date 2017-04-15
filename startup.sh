@@ -1,8 +1,8 @@
 #! /bin/sh
-# /etc/init.d/noip 
+# /etc/init.d/startup
 
 ### BEGIN INIT INFO
-# Provides:          noip
+# Provides:          listener
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
@@ -24,10 +24,11 @@ case "$1" in
   stop)
     echo "Stopping listener"
     # kill application you want to stop
-    killall pullScript
+    	killall pullScript
+	killall java
     ;;
   *)
-    echo "Usage: /etc/init.d/pullScript {start|stop}"
+    echo "Usage: /etc/init.d/pullScript.sh {start|stop}"
     exit 1
     ;;
 esac
