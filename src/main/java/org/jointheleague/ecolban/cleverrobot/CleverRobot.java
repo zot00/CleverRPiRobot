@@ -28,24 +28,9 @@ public class CleverRobot extends IRobotAdapter {
 	}
 
 	private void setup() {
-		//
-
-		try {
+		
 			driveDirect(200, 200);
-			Thread.sleep(1000);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			try {
-				System.err.println("shutdown");
-				shutDown();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
 
 	}
 
