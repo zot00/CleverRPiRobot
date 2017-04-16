@@ -27,7 +27,7 @@ public class CleverRobot extends IRobotAdapter {
 		rob.shutDown();
 	}
 
-	private void setup() {
+	private void setup() throws Exception {
 		
 			driveDirect(200, 200);
 		
