@@ -25,7 +25,6 @@ public class CleverRobot extends IRobotAdapter {
 		while (rob.loop()) {
 		}
 		rob.shutDown();
-
 	}
 
 	private void setup() {
@@ -50,7 +49,10 @@ public class CleverRobot extends IRobotAdapter {
 
 	}
 
-	private boolean loop() {
+	private boolean loop() throws IOException {
+		if (isCleanButtonDown()) {
+			shutDown();
+		}
 		try {
 			System.out.println("LEFT SONAR: " + sonar.readSonar("left"));
 			System.out.println("RIGHT SONAR: " + sonar.readSonar("right"));
@@ -58,13 +60,6 @@ public class CleverRobot extends IRobotAdapter {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			try {
-				System.err.println("shutdown");
-				shutDown();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 
 			e.printStackTrace();
 		}
